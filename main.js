@@ -33,8 +33,8 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', opti
                     <div onclick=alert('id='+'${data[idx]['id']}') class="card col-4 card_event">
                         <h1 style="font-size:23px; font-weight: bolder;">${data[idx]['title']}</h1>
                         <img class="card_image" src=${API_URL + data[idx]['poster_path']}>
-                        <button  type="button" class="btn btn-outline-dark card_button ">More</button>
-                        
+                        <button style="margin-right:95px;" type="button" class="btn btn-outline-dark card_button ">More</button>
+                        <button style="margin-left:95px;" onclick=alert(${data[idx]['overview']}) type="button" class="btn btn-outline-dark card_button ">줄거리</button>
                     </div>
                     `;
                     main_card.innerHTML = resultHtml;
@@ -48,14 +48,14 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', opti
 
 
 
-        //엔터키 누를시에 검색
+        //엔터키 누를시에 검색 
         document.addEventListener("keyup", function (event) {
-            if (event.keyCode === 13) {
+            if (event.key == "Enter") {
                 bt_search.click();
             }
         });
 
-        //onclick=alert('id='+'${data[idx]['id']}')
+
 
 
 
@@ -63,13 +63,13 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', opti
         let resultHtml = "";
         let MadeCard = () => {
             data.forEach((item, idx) => {
-
+                console.log(data[idx]['overview']);
                 resultHtml +=
                     `
                     <div  class="card col-4 card_event">
                         <h1 style="font-size:23px; font-weight: bolder;">${data[idx]['title']}</h1>
                         <img onclick=alert('id='+'${data[idx]['id']}') class="card_image" src=${API_URL + data[idx]['poster_path']}>
-                        <button style="margin-right:95px;" onclick=alert('평점:'+'${data[idx]['vote_average']}') type="button" class="btn btn-outline-dark card_button ">평점</button>
+                        <button style="margin-right:95px;" onclick=alert('평점:'+${data[idx]['vote_average']}) type="button" class="btn btn-outline-dark card_button ">평점</button>
                         <button style="margin-left:95px;" onclick=alert(${data[idx]['overview']}) type="button" class="btn btn-outline-dark card_button ">줄거리</button>
                     </div>
                     `;
